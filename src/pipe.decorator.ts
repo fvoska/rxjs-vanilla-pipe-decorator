@@ -12,7 +12,7 @@ export function Pipe(
 
     const originalMethod: Function = descriptor.value;
 
-    source$.subscribe((args: IArguments) => {
+    source$.pipe.apply(source$, operators).subscribe((args: IArguments) => {
       originalMethod(...args);
     });
 
