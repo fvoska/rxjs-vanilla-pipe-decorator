@@ -18,9 +18,7 @@ class Component {
       const event: MouseEvent = args[0];
       const someText: string = args[1];
 
-      console.log(event, someText);
-
-      return args;
+      return [event.target, someText];
     }),
   ])
   private handleClick(event: MouseEvent, someText: string): void {
