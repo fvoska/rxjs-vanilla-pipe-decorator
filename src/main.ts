@@ -2,6 +2,8 @@ import { debounceTime } from 'rxjs/operators';
 import { Pipe } from './pipe.decorator';
 
 class Component {
+  private foo = 42;
+
   constructor() {
     const button: HTMLButtonElement = document.querySelector('.click-me');
 
@@ -13,8 +15,8 @@ class Component {
   @Pipe([
     debounceTime(250),
   ])
-  private handleClick(event: MouseEvent): void {
-    console.log(event);
+  private handleClick(_event: MouseEvent): void {
+    console.log(this.foo);
   }
 }
 
