@@ -1,4 +1,5 @@
 import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 class Component {
   private click$ = new Subject<MouseEvent>();
@@ -10,7 +11,9 @@ class Component {
       this.handleClick(event);
     });
 
-    this.click$.subscribe((event) => {
+    this.click$.pipe(
+      debounceTime(250),
+    ).subscribe((event) => {
       console.log(event);
     });
   }
