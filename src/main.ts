@@ -1,4 +1,4 @@
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 import { Pipe } from './pipe.decorator';
 
 class Component {
@@ -7,16 +7,24 @@ class Component {
   constructor() {
     const button: HTMLButtonElement = document.querySelector('.click-me');
 
-    button.addEventListener('click', (event) => {
-      this.handleClick(event);
+    button.addEventListener('click', (event: MouseEvent) => {
+      this.handleClick(event, 'some text');
     });
   }
 
   @Pipe([
     debounceTime(250),
+    map((args: IArguments) => {
+      const event: MouseEvent = args[0];
+      const someText: string = args[1];
+
+      console.log(event, someText);
+
+      return args;
+    }),
   ])
-  private handleClick(_event: MouseEvent): void {
-    console.log(this.foo);
+  private handleClick(event: MouseEvent, someText: string): void {
+    console.log(event, someText);
   }
 }
 
