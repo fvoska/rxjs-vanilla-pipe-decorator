@@ -12,11 +12,14 @@ export function Pipe(
 
     const originalMethod: Function = descriptor.value;
 
+    let _this: any;
+
     source$.pipe.apply(source$, operators).subscribe((args: IArguments) => {
-      originalMethod(...args);
+      originalMethod.apply(_this, args);
     });
 
     descriptor.value = function() {
+      _this = this;
       source$.next(arguments);
     }
   }
