@@ -1,5 +1,3 @@
-import { Pipe } from './pipe.decorator';
-
 class Component {
   constructor() {
     const button: HTMLButtonElement = document.querySelector('.click-me');
@@ -9,9 +7,8 @@ class Component {
     });
   }
 
-  @Pipe([])
   private handleClick(event: MouseEvent): void {
-    console.log(this, event);
+    console.log(event);
   }
 }
 
